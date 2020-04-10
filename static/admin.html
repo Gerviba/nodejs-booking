@@ -41,11 +41,18 @@
 <div class="container">
     <div class="jumbotron">
         <h1 class="m-3" style="text-align: center">ADMIN DASHBOARD</h1>
+        <hr class="my-4 bg-light">
+        <a href="#places" class="btn btn-secondary">Places</a>
+        <a href="#users" class="btn btn-secondary">Users</a>
+        <a href="insert-place.html" class="btn btn-success">New place</a>
     </div>
 </div>
 
 <div class="album py-5">
     <div class="container">
+        <div class="container text-center">
+            <h2 id="places">PLACES</h2>
+        </div>
         <div class="row" style="align-items: stretch; justify-content: center;">
             <table class="table table-bordered">
                 <thead class="thead-light">
@@ -92,9 +99,39 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="container m-5 text-center">
-        <a href="insert-place.html" class="btn btn-success">REGISTER NEW PLACE</a>
+        <div class="row m-5 text-center">
+            <a href="insert-place.html" class="btn btn-success" style="margin: 0 auto">REGISTER NEW PLACE</a>
+        </div>
+        <div class="container text-center">
+            <h2 id="users">USERS</h2>
+        </div>
+        <div class="row" style="align-items: stretch; justify-content: center;">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Authorities</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row">Admin User</td>
+                    <td scope="row">ADMIN</td>
+                    <td scope="row" class="text-right">
+                        Revoke: <a class="btn btn-danger btn-sm m-1" role="button" href="#" style="max-height: 36px"><span class="material-icons">remove_circle</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Kiss Pista</td>
+                    <td scope="row">USER</td>
+                    <td scope="row" class="text-right">
+                        Grant: <a class="btn btn-warning btn-sm m-1" role="button" href="#" style="max-height: 36px"><span class="material-icons">verified_user</span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
