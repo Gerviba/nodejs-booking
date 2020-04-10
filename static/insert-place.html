@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Accommodation Database</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="row flex-lg-row w-100">
+            <div class="col-lg-4 col-12">
+                <form class="form-inline input-group" method="get" action="index.html">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><span class="material-icons">search</span></span>
+                    </div>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                </form>
+            </div>
+            <div class="col-lg-8 col-12 m-2 m-lg-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="index.html">ALL</a>
+                        <a class="nav-item nav-link" href="ratings.html">MY RATINGS</a>
+                        <a class="nav-item nav-link" href="profile.html">PROFILE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="m-3" style="text-align: center">REGISTER PLACE</h1>
+    </div>
+</div>
+
+<div class="container p-5">
+    <form>
+        <div class="form-group row">
+            <label for="name" class="col-4 col-form-label">Place name</label>
+            <div class="col-8">
+                <input id="name" name="name" type="text" class="form-control" required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="location" class="col-4 col-form-label">Location</label>
+            <div class="col-8">
+                <input id="location" name="location" type="text" class="form-control" required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="longnitude" class="col-4 col-form-label">GPS</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Longnitude</div>
+                    </div>
+                    <input id="longnitude" name="longnitude" type="text" class="form-control" required="required">
+                    <div class="input-group-append">
+                        <div class="input-group-text">°</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="latitude" class="col-4 col-form-label"></label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Latitude</div>
+                    </div>
+                    <input id="latitude" name="latitude" type="text" class="form-control" required="required">
+                    <div class="input-group-append">
+                        <div class="input-group-text">°</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="website" class="col-4 col-form-label">Website</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><span class="material-icons">language</span></div>
+                    </div>
+                    <input id="website" name="website" type="text" required="required" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="image1" class="col-4 col-form-label">First photo url</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><span class="material-icons">add_photo_alternate</span></div>
+                    </div>
+                    <input id="image1" name="image1" type="text" required="required" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="image2" class="col-4 col-form-label">Second photo url</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><span class="material-icons">add_photo_alternate</span></div>
+                    </div>
+                    <input id="image2" name="image2" type="text" aria-describedby="image2HelpBlock" class="form-control" required="required">
+                </div>
+                <span id="image2HelpBlock" class="form-text text-muted">An image about the environment of the place</span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="type" class="col-4 col-form-label">Place type</label>
+            <div class="col-8">
+                <select id="type" name="type" required="required" class="custom-select">
+                    <option value="accommodation">Accommodation</option>
+                    <option value="pub">Pub</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4">Price category</label>
+            <div class="col-8">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input name="price" id="price_0" type="radio" required="required" class="custom-control-input" value="1">
+                    <label for="price_0" class="custom-control-label">$</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input name="price" id="price_1" type="radio" required="required" class="custom-control-input" value="2" checked="checked">
+                    <label for="price_1" class="custom-control-label">$$</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input name="price" id="price_2" type="radio" required="required" class="custom-control-input" value="3">
+                    <label for="price_2" class="custom-control-label">$$$</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input name="price" id="price_3" type="radio" required="required" class="custom-control-input" value="4">
+                    <label for="price_3" class="custom-control-label">$$$$</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input name="price" id="price_4" type="radio" required="required" class="custom-control-input" value="5">
+                    <label for="price_4" class="custom-control-label">$$$$$</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lastVisited" class="col-4 col-form-label">Last visited</label>
+            <div class="col-8">
+                <input id="lastVisited" name="lastVisited" type="date" class="form-control" required="required">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="submit" type="submit" class="btn btn-primary">CREATE</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

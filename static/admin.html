@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Accommodation Database</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="row flex-lg-row w-100">
+            <div class="col-lg-4 col-12">
+                <form class="form-inline input-group" method="get" action="index.html">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="search-addon"><span class="material-icons">search</span></span>
+                    </div>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                </form>
+            </div>
+            <div class="col-lg-8 col-12 m-2 m-lg-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="index.html">ALL</a>
+                        <a class="nav-item nav-link" href="ratings.html">MY RATINGS</a>
+                        <a class="nav-item nav-link" href="profile.html">PROFILE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="m-3" style="text-align: center">ADMIN DASHBOARD</h1>
+    </div>
+</div>
+
+<div class="album py-5">
+    <div class="container">
+        <div class="row" style="align-items: stretch; justify-content: center;">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" colspan="3">NAME OF THE PLACE</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row">Id</td>
+                    <td>213</td>
+                    <td rowspan="5" width="10">
+                        <a class="btn btn-primary btn-sm m-1" role="button" href="details.html" style="max-height: 36px"><span class="material-icons">visibility</span></a>
+                        <a class="btn btn-danger btn-sm m-1" role="button" href="#" style="max-height: 36px"><span class="material-icons">delete</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Name</td>
+                    <td>Name of the place 1</td>
+                </tr>
+                <tr>
+                    <td scope="row">Location</td>
+                    <td>Location of the place</td>
+                </tr>
+                <tr>
+                    <td scope="row">Author</td>
+                    <td>First Lastname</td>
+                </tr>
+                <tr>
+                    <td scope="row">Website</td>
+                    <td><a href="http://website.com/xyz/pub">http://website.com/xyz/pub</a></td>
+                </tr>
+                <tr class="table-primary">
+                    <td colspan="3">REVIEWS OF THIS PLACE (1)</td>
+                </tr>
+                <tr>
+                    <td scope="row">KISS PISTA</td>
+                    <td style="max-width: 300px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada pulvinar est, in laoreet elit consectetur sit amet. Fusce malesuada at est et consequat. Curabitur auctor ullamcorper eros a ornare. Maecenas luctus, ante ac porta tristique, neque erat dapibus velit, vitae lobortis lorem velit sit amet metus. Duis pretium leo eleifend purus scelerisque, vitae faucibus erat ornare. In risus nisl, varius eu ultrices ac, eleifend sit amet felis. Vestibulum in finibus leo. Mauris euismod cursus ullamcorper. In eleifend dictum diam eget venenatis.</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm m-1" role="button" href="details.html#review-1" style="max-height: 36px"><span class="material-icons">visibility</span></a>
+                        <a class="btn btn-danger btn-sm m-1" role="button" href="#delete" style="max-height: 36px"><span class="material-icons">delete</span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container m-5 text-center">
+        <a href="insert-place.html" class="btn btn-success">REGISTER NEW PLACE</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
