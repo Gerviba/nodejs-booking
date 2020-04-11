@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="row flex-lg-row w-100">
+            <div class="col-lg-4 col-12">
+                <form class="form-inline input-group" method="get" action="/">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="search-addon"><span class="material-icons">search</span></span>
+                    </div>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                </form>
+            </div>
+            <div class="col-lg-8 col-12 m-2 m-lg-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link<%= (view === 'index') ? ' active' : '' %>" href="/index">ALL</a>
+                        <a class="nav-item nav-link<%= (view === 'ratings') ? ' active' : '' %>" href="/ratings">MY RATINGS</a>
+                        <a class="nav-item nav-link<%= (view === 'profile') ? ' active' : '' %>" href="/profile">PROFILE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,48 @@
+<%- include('layout-header') -%>
+<%- include('layout-menu') -%>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="m-3" style="text-align: center">PROFILE</h1>
+    </div>
+</div>
+
+<div class="album py-5">
+    <div class="container" style="max-width: 400px">
+        <div class="row" style="align-items: stretch; justify-content: center;">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td scope="row">Avatar</td>
+                    <td>
+                        <img src="https://www.gravatar.com/avatar/<%= user.emailHash %>?s=128&d=retro" height="128" width="128">
+
+                        <small class="text-muted text-light">(from Gravatar)</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Name</td>
+                    <td><%= user.name %></td>
+                </tr>
+                <tr>
+                    <td scope="row">Email</td>
+                    <td><%= user.email %></td>
+                </tr>
+                <% if (user.admin) { %>
+                <tr>
+                    <td scope="row">Admin status</td>
+                    <td><a href="/admin" class="btn btn-outline-danger btn-sm">GRANTED, ENTER ADMIN MODE</a></td>
+                </tr>
+                <% } %>
+                <tr>
+                    <td scope="row">Actions</td>
+                    <td><a href="/logout" class="btn btn-secondary btn-sm">LOG OUT</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<%- include('layout-footer') -%>

@@ -34,7 +34,7 @@ module.exports = function (app) {
         authorizationMW(objectRepo),
         validateReviewDeleteActionMW(objectRepo),
         deleteReviewMW(objectRepo),
-        redirectMW(objectRepo, '/ratings'));
+        redirectMW(objectRepo, '/ratings?status=ok'));
 
     app.get('/profile',
         authorizationMW(objectRepo),
@@ -55,10 +55,12 @@ module.exports = function (app) {
 
     app.get('/place/:id/new-review',
         authorizationMW(objectRepo),
+        getPlaceMW(objectRepo),
         endpointMW(objectRepo, 'insert-review'));
 
     app.post('/place/:id/new-review',
         authorizationMW(objectRepo),
+        getPlaceMW(objectRepo),
         newReviewMW(objectRepo));
 
     app.get('/admin',

@@ -1,46 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Accommodation Database</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <div class="row flex-lg-row w-100">
-            <div class="col-lg-4 col-12">
-                <form class="form-inline input-group" method="get" action="index.html">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><span class="material-icons">search</span></span>
-                    </div>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-                </form>
-            </div>
-            <div class="col-lg-8 col-12 m-2 m-lg-0">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="index.html">ALL</a>
-                        <a class="nav-item nav-link" href="ratings.html">MY RATINGS</a>
-                        <a class="nav-item nav-link" href="profile.html">PROFILE</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+<%- include('layout-header') -%>
+<%- include('layout-menu') -%>
 
 <div class="container">
     <div class="jumbotron">
-        <h1 class="m-3" style="text-align: center">EDIT PLACE</h1>
+        <h1 class="m-3" style="text-align: center">REGISTER PLACE</h1>
     </div>
 </div>
 
@@ -115,7 +78,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><span class="material-icons">add_photo_alternate</span></div>
                     </div>
-                    <input id="image2" name="image2" type="text" aria-describedby="image2HelpBlock" class="form-control" required="required">
+                    <input id="image2" name="image2" type="text" class="form-control" required="required">
                 </div>
                 <span id="image2HelpBlock" class="form-text text-muted">An image about the environment of the place</span>
             </div>
@@ -137,7 +100,7 @@
                     <label for="price_0" class="custom-control-label">$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input name="price" id="price_1" type="radio" required="required" class="custom-control-input" value="2" checked="checked">
+                    <input name="price" id="price_1" type="radio" required="required" class="custom-control-input" value="2">
                     <label for="price_1" class="custom-control-label">$$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
@@ -173,16 +136,19 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="description" class="col-4 col-form-label">Description</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <textarea id="description" name="description" type="text" class="form-control" required="required"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
             <div class="offset-4 col-8">
-                <button name="submit" type="submit" class="btn btn-primary">SAVE CHANGES</button>
-                <a href="/admin" class="btn btn-secondary" role="button">Cancel</a>
+                <button name="submit" type="submit" class="btn btn-primary">CREATE</button>
             </div>
         </div>
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
-</html>
+<%- include('layout-footer') -%>

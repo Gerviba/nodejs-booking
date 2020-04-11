@@ -3,6 +3,6 @@
  */
 
 module.exports = (objects, template) => (req, res) => {
-    console.log(`endpoint to render: ${template}`);
-    res.end(`Template: ${template}`);
+    res.locals.view = template;
+    res.render(template, res.locals);
 };

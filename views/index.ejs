@@ -1,0 +1,64 @@
+<%- include('layout-header') -%>
+<%- include('layout-menu') -%>
+
+<div class="album bg-secondary" style="background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url(https://picsum.photos/960/280?blur); background-size: cover; background-position: center center">
+    <div class="container">
+        <div class="jumbotron" style="background-color: transparent; border-radius: 0; margin-bottom: 0">
+            <form action="#" method="get" class="m-0 m-lg-5">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Name of the accommodation or pub" name="q" autocomplete="off" value="<%= searchQuery %>">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark btn-sm" type="submit"><span class="material-icons">search</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row" style="align-items: stretch; justify-content: center;">
+
+            <% searchResult.forEach(it => {%>
+            <div class="card col-md-3 p-0 m-3">
+                <img class="card-img-top" height="178" src="<%= it.photo1 %>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><%= it.name %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= it.location %></h6>
+                    <p class="card-text"><%= it.description %></p>
+
+                    <% if (it.type === 'pub') { %>
+                        <span class="badge badge-danger"style="text-transform: uppercase">Pub</span>
+                    <% } else { %>
+                        <span class="badge badge-primary"style="text-transform: uppercase">Accommodation</span>
+                    <% } %>
+
+                    <% it.labels.forEach(label => { %>
+                        <span class="badge badge-dark" style="text-transform: uppercase"><%= label %></span>
+                    <% }); %>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item border-bottom-0 text-center">
+                        <small class="text-muted">
+                            <span class="material-icons text-dark" style="max-width: 20px"><%= (it.rating >= 1) ? 'favorites' : 'favorite_border' -%></span>
+                            <span class="material-icons text-dark" style="max-width: 20px"><%= (it.rating >= 2) ? 'favorites' : 'favorite_border' -%></span>
+                            <span class="material-icons text-dark" style="max-width: 20px"><%= (it.rating >= 3) ? 'favorites' : 'favorite_border' -%></span>
+                            <span class="material-icons text-dark" style="max-width: 20px"><%= (it.rating >= 4) ? 'favorites' : 'favorite_border' -%></span>
+                            <span class="material-icons text-dark" style="max-width: 20px"><%= (it.rating >= 5) ? 'favorites' : 'favorite_border' -%></span>
+                        </small>
+                    </li>
+                </ul>
+                <div class="card-footer text-center">
+                    <a href="/place/<%= it.id %>" class="btn btn-secondary btn-sm" role="button">MORE INFO</a>
+                </div>
+            </div>
+            <% }); %>
+            <% if (searchResult.length === 0) { %>
+            <h2>No results found...</h2>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('layout-footer') -%>

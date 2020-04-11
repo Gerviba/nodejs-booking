@@ -1,10 +1,11 @@
 /**
  * Provides the data of the selected users
- * - Result will be saved to: res.local.users
+ * - Result will be saved to: res.locals.users
  */
 
-module.exports = function (objects) {
-    return function (req, res, next) {
-        next();
-    };
+const usersRepo = require("../../model/user-entity");
+
+module.exports = objects => (req, res, next) => {
+    res.locals.users = [usersRepo.adminalUserMock, usersRepo.normalUserMock];
+    next();
 };

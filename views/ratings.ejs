@@ -1,0 +1,41 @@
+<%- include('layout-header') -%>
+<%- include('layout-menu') -%>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="m-3" style="text-align: center">RATINGS</h1>
+    </div>
+</div>
+
+<div class="album py-5">
+    <div class="container">
+        <div class="row" style="align-items: stretch; justify-content: center;">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Place</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% reviews.forEach(review => { %>
+                <tr>
+                    <td scope="row"><%= review.placeName %></td>
+                    <td><%= review.rating %> stars</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" role="button" href="/place/<%= review.placeId %>#review-<%= review.id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
+                        <form style="display: inline-block" action="/ratings/<%= review.id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
+                    </td>
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <div class="row m-5 text-center">
+            <a href="/new-place" class="btn btn-success" style="margin: 0 auto">REGISTER NEW PLACE</a>
+        </div>
+    </div>
+</div>
+
+<%- include('layout-footer') -%>
