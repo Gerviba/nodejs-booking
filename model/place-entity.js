@@ -1,6 +1,28 @@
+const Schema = require('mongoose').Schema;
+const db = require('../config/database');
+
+const PlaceEntity = db.model('Place', {
+    id: Number,
+    _author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    name: String,
+    location: String,
+    longitude: Number,
+    latitude: Number,
+    website: String,
+    photo1: String,
+    photo2: String,
+    type: String,
+    labels: [[String]],
+    lastVisited: String,
+    priceCategory: Number
+});
+
 /**
  *
- * @type {{website: string, latitude: number, authorId: number, photo2: string, type: string, labels: [string...], photo1: string, lastVisited: string, name: string, priceCategory: number, location: string, id: number, longitude: number}}
+ * @type {{website: string, latitude: number, rating: number, description: string, authorId: number, photo2: string, type: string, labels: [string, string, string], photo1: string, lastVisited: string, name: string, priceCategory: number, location: string, id: number, longitude: number}}
  */
 var placeMock = {
     id: 1,

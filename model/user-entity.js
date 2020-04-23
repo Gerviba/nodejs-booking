@@ -1,3 +1,13 @@
+const Schema = require('mongoose').Schema;
+const db = require('../config/database');
+
+const UserEntity = db.model('User', {
+    oauthInternalId: String,
+    name: String,
+    email: String,
+    admin: Boolean
+});
+
 
 /**
  * Admin felhasználó mock

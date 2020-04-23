@@ -1,3 +1,18 @@
+const Schema = require('mongoose').Schema;
+const db = require('../config/database');
+
+const ReviewEntity = db.model('Review', {
+    _place: {
+        type: Schema.Types.ObjectId,
+        ref: 'Place'
+    },
+    owner: String,
+    text: String,
+    rating: Number,
+    costs: Number,
+    date: String
+});
+
 
 module.exports.reviewMock = {
     id: 1,
