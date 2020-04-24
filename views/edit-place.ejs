@@ -8,7 +8,12 @@
 </div>
 
 <div class="container p-5">
-    <form action="/admin/place/<%= place.id %>" method="post">
+    <% if (typeof errors !== 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+            <% errors.forEach(err => { %><li><%= err %></li><% }) %>
+        </div>
+    <% } %>
+    <form action="/admin/place/<%= place._id %>" method="post">
         <div class="form-group row">
             <label for="name" class="col-4 col-form-label">Place name</label>
             <div class="col-8">
@@ -61,26 +66,26 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="image1" class="col-4 col-form-label">First photo url</label>
+            <label for="photo1" class="col-4 col-form-label">First photo url</label>
             <div class="col-8">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><span class="material-icons">add_photo_alternate</span></div>
                     </div>
-                    <input id="image1" name="image1" type="text" required="required" class="form-control" value="<%= place.photo1 %>">
+                    <input id="photo1" name="photo1" type="text" required="required" class="form-control" value="<%= place.photo1 %>">
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            <label for="image2" class="col-4 col-form-label">Second photo url</label>
+            <label for="photo2" class="col-4 col-form-label">Second photo url</label>
             <div class="col-8">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><span class="material-icons">add_photo_alternate</span></div>
                     </div>
-                    <input id="image2" name="image2" type="text" class="form-control" required="required" value="<%= place.photo2 %>">
+                    <input id="photo2" name="photo2" type="text" class="form-control" required="required" value="<%= place.photo2 %>">
                 </div>
-                <span id="image2HelpBlock" class="form-text text-muted">An image about the environment of the place</span>
+                <span id="photo2HelpBlock" class="form-text text-muted">An image about the environment of the place</span>
             </div>
         </div>
         <div class="form-group row">
@@ -96,23 +101,23 @@
             <label class="col-4">Price category</label>
             <div class="col-8">
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input name="price" id="price_0" type="radio" required="required" class="custom-control-input" value="1" <%= (place.priceCategory === 1) ? " checked=\"checked\"" : "" %>>
+                    <input name="priceCategory" id="price_0" type="radio" required="required" class="custom-control-input" value="1" <%= (place.priceCategory == 1) ? " checked=\"checked\"" : "" %>>
                     <label for="price_0" class="custom-control-label">$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input name="price" id="price_1" type="radio" required="required" class="custom-control-input" value="2" <%= (place.priceCategory === 2) ? " checked=\"checked\"" : "" %>>
+                    <input name="priceCategory" id="price_1" type="radio" required="required" class="custom-control-input" value="2" <%= (place.priceCategory == 2) ? " checked=\"checked\"" : "" %>>
                     <label for="price_1" class="custom-control-label">$$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input name="price" id="price_2" type="radio" required="required" class="custom-control-input" value="3" <%= (place.priceCategory === 3) ? " checked=\"checked\"" : "" %>>
+                    <input name="priceCategory" id="price_2" type="radio" required="required" class="custom-control-input" value="3" <%= (place.priceCategory == 3) ? " checked=\"checked\"" : "" %>>
                     <label for="price_2" class="custom-control-label">$$$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input name="price" id="price_3" type="radio" required="required" class="custom-control-input" value="4" <%= (place.priceCategory === 4) ? " checked=\"checked\"" : "" %>>
+                    <input name="priceCategory" id="price_3" type="radio" required="required" class="custom-control-input" value="4" <%= (place.priceCategory == 4) ? " checked=\"checked\"" : "" %>>
                     <label for="price_3" class="custom-control-label">$$$$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input name="price" id="price_4" type="radio" required="required" class="custom-control-input" value="5" <%= (place.priceCategory === 5) ? " checked=\"checked\"" : "" %>>
+                    <input name="priceCategory" id="price_4" type="radio" required="required" class="custom-control-input" value="5" <%= (place.priceCategory == 5) ? " checked=\"checked\"" : "" %>>
                     <label for="price_4" class="custom-control-label">$$$$$</label>
                 </div>
             </div>
@@ -124,13 +129,13 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="tags" class="col-4 col-form-label">Tags</label>
+            <label for="labels" class="col-4 col-form-label">Tags</label>
             <div class="col-8">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><span class="material-icons">label</span></div>
                     </div>
-                    <input id="tags" name="tags" type="text" class="form-control" required="required" placeholder="wifi, bathroom" value="<%= place.labels.join(", ") %>">
+                    <input id="labels" name="labels" type="text" class="form-control" required="required" placeholder="wifi, bathroom" value="<%= place.labels %>">
                 </div>
                 <span id="tagsHelpBlock" class="form-text text-muted">Separate tags with comma (,)</span>
             </div>

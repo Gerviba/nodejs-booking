@@ -6,18 +6,26 @@ const ReviewEntity = db.model('Review', {
         type: Schema.Types.ObjectId,
         ref: 'Place'
     },
-    owner: String,
+    _owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     text: String,
     rating: Number,
     costs: Number,
     date: String
 });
 
+module.exports = ReviewEntity;
 
-module.exports.reviewMock = {
+/**
+ * Review mock (for manual testing purposes)
+ * @type {{owner: string, date: string, costs: number, placeId: number, rating: number, id: number, text: string, placeName: string}}
+ */
+module.exports._reviewMock = {
     id: 1,
     placeId: 1,
-    placeName: "Pinyo pub",  // TODO: Calculate this dynamically
+    placeName: 'Pinyo pub',
     owner: 'Kiss Pista',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada pulvinar est, in laoreet elit consectetur sit amet. Fusce malesuada at est et consequat. Curabitur auctor ullamcorper eros a ornare. Maecenas luctus, ante ac porta tristique, neque erat dapibus velit, vitae lobortis lorem velit sit amet metus. Duis pretium leo eleifend purus scelerisque, vitae faucibus erat ornare. In risus nisl, varius eu ultrices ac, eleifend sit amet felis. Vestibulum in finibus leo. Mauris euismod cursus ullamcorper. In eleifend dictum diam eget venenatis.',
     rating: 4,

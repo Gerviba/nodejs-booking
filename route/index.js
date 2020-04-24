@@ -1,5 +1,6 @@
 const authorizationMW = require('../middleware/permissions/autorizeMW');
 const checkAdminMW = require('../middleware/permissions/adminMW');
+const logoutMW = require('../middleware/permissions/logoutMW');
 const redirectToSingleSignOnMW = require('../middleware/permissions/ssoRedirectMW');
 const endpointMW = require('../middleware/common/endpointMW');
 const redirectMW = require('../middleware/common/redirectMW');
@@ -15,13 +16,26 @@ const newReviewMW = require('../middleware/businesslogic/newReviewMW');
 const deleteReviewMW = require('../middleware/businesslogic/deleteReviewMW');
 const getUserMW = require('../middleware/businesslogic/getUserMW');
 const validateReviewDeleteActionMW = require('../middleware/permissions/validateReviewDeleteActionMW');
+const validatePlaceMW = require('../middleware/businesslogic/validatePlaceMW');
 
 const getAllPlacesMW = require('../middleware/businesslogic/getAllPlacesMW');
 const getAllUsersMW = require('../middleware/businesslogic/getAllUsersMW');
 const grantAdminMW = require('../middleware/permissions/grantUserMW');
 
-module.exports = function (app) {
-    const objectRepo = {};
+const testLoginAsAdmin = require('../middleware/test/loginAsAdminMW');
+const testLoginAsUser = require('../middleware/test/loginAsUserMW');
+const testLoadData = require('../middleware/test/loadTestData');
+
+const userRepo = require('../model/userEntity');
+const placeRepo = require('../model/placeEntity');
+const reviewRepo = require('../model/reviewEntity');
+
+module.exports = app => {
+    const objectRepo = {
+        userRepo: userRepo,
+        placeRepo: placeRepo,
+        reviewRepo: reviewRepo
+    };
 
     app.get('/ratings',
         authorizationMW(objectRepo),
@@ -29,6 +43,10 @@ module.exports = function (app) {
         endpointMW(objectRepo, 'ratings'));
 
     app.get('/login', redirectToSingleSignOnMW(objectRepo));
+
+    app.get('/logout',
+        logoutMW(objectRepo),
+        redirectMW(objectRepo, '/'));
 
     app.post('/ratings/:id/delete',
         authorizationMW(objectRepo),
@@ -51,6 +69,7 @@ module.exports = function (app) {
 
     app.post('/new-place',
         authorizationMW(objectRepo),
+        validatePlaceMW(objectRepo),
         newPlaceMW(objectRepo));
 
     app.get('/place/:id/new-review',
@@ -74,7 +93,7 @@ module.exports = function (app) {
         authorizationMW(objectRepo),
         checkAdminMW(objectRepo),
         deletePlaceMW(objectRepo),
-        redirectMW('/admin'));
+        redirectMW(objectRepo, '/admin'));
 
     app.get('/admin/place/:id',
         authorizationMW(objectRepo),
@@ -85,6 +104,7 @@ module.exports = function (app) {
     app.post('/admin/place/:id',
         authorizationMW(objectRepo),
         checkAdminMW(objectRepo),
+        validatePlaceMW(objectRepo),
         editPlaceMW(objectRepo),
         redirectMW(objectRepo, '/admin'));
 
@@ -106,7 +126,12 @@ module.exports = function (app) {
         grantAdminMW(objectRepo, false),
         redirectMW(objectRepo, '/admin#users'));
 
-    app.use('/',
+    // Endpoints form manual testing purposes:
+    app.get('/test/login/admin', testLoginAsAdmin(objectRepo));
+    app.get('/test/login/user', testLoginAsUser(objectRepo));
+    app.get('/test/data', testLoadData(objectRepo));
+
+    app.get('',
         populateSearch(objectRepo),
         endpointMW(objectRepo, 'index'));
 

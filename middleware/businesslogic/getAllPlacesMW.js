@@ -1,16 +1,30 @@
+const requireResource = require('../common/commons').requireResource;
+
 /**
  * Provides the data of all the places (and its reviews)
  * - Result will be saved to: res.locals.places
  */
 
-const placesRepo = require("../../model/place-entity");
-const reviewsRepo = require("../../model/review-entity");
+module.exports = repos => {
+    const PlaceModel = repos.placeRepo;
+    const ReviewModel = repos.reviewRepo;
 
-module.exports = objects => (req, res, next) => {
-    res.locals.places = placesRepo.demoPlaces;
-    // TODO: Load from db
-    res.locals.places[0].reviews = [reviewsRepo.reviewMock];
-    res.locals.places[1].reviews = [];
-    res.locals.places[2].reviews = [];
-    next();
+    return (req, res, next) => {
+        PlaceModel
+            .find()
+            .populate('_author')
+            .then(places => {
+                res.locals.places = places;
+
+                let reviewPromises = [];
+                res.locals.places.forEach(place => reviewPromises.push(ReviewModel
+                    .find({ _place: place._id })
+                    .populate('_owner')
+                    .then(reviews => place.reviews = reviews)
+                ));
+
+                Promise.all(reviewPromises).then(_ => next());
+            })
+            .catch(error => res.status(404).send('Failed to fetch places', error));
+    };
 };

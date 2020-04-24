@@ -29,9 +29,9 @@
                     <td scope="row">Id</td>
                     <td><%= place.id %></td>
                     <td rowspan="5" width="10">
-                        <a class="btn btn-primary btn-sm m-1" role="button" href="/place/<%= place.id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
-                        <a class="btn btn-primary btn-sm m-1" role="button" href="/admin/place/<%= place.id %>" style="max-height: 36px"><span class="material-icons">create</span></a>
-                        <form class="m-1" style="display: inline-block" action="/admin/place/<%= place.id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
+                        <a class="btn btn-primary btn-sm m-1" role="button" href="/place/<%= place._id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
+                        <a class="btn btn-primary btn-sm m-1" role="button" href="/admin/place/<%= place._id %>" style="max-height: 36px"><span class="material-icons">create</span></a>
+                        <form class="m-1" style="display: inline-block" action="/admin/place/<%= place._id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
                     </td>
                 </tr>
                 <tr>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td scope="row">Author</td>
-                    <td><%= place.ownerName %></td>
+                    <td><%= place._author.name %></td>
                 </tr>
                 <tr>
                     <td scope="row">Website</td>
@@ -55,11 +55,11 @@
                 </tr>
                 <% place.reviews.forEach(review => { %>
                 <tr>
-                    <td scope="row"><%= review.owner %></td>
+                    <td scope="row"><%= review._owner.name %></td>
                     <td style="max-width: 300px"><%= review.text %></td>
                     <td>
-                        <a class="btn btn-primary btn-sm m-1" role="button" href="/place/<%= review.placeId %>#review-<%= review.id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
-                        <form class="m-1" style="display: inline-block" action="/admin/review/<%= review.id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
+                        <a class="btn btn-primary btn-sm m-1" role="button" href="/place/<%= place._id %>#review-<%= review._id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
+                        <form class="m-1" style="display: inline-block" action="/admin/review/<%= review._id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
                     </td>
                 </tr>
                 <% }); %>
@@ -89,9 +89,9 @@
                     <td scope="row"><%= user.admin ? "ADMIN" : "USER" %></td>
                     <td scope="row" class="text-right">
                         <% if (user.admin) { %>
-                        Revoke: <form class="m-1" style="display: inline-block" action="/admin/user/<%= user.id %>/revoke" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">remove_circle</span></button></form>
+                        Revoke: <form class="m-1" style="display: inline-block" action="/admin/user/<%= user._id %>/revoke" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">remove_circle</span></button></form>
                         <% } else { %>
-                        Grant: <form class="m-1" style="display: inline-block" action="/admin/user/<%= user.id %>/grant" method="post"><button type="submit" class="btn btn-warning btn-sm" role="button" style="max-height: 36px"><span class="material-icons">verified_user</span></button></form>
+                        Grant: <form class="m-1" style="display: inline-block" action="/admin/user/<%= user._id %>/grant" method="post"><button type="submit" class="btn btn-warning btn-sm" role="button" style="max-height: 36px"><span class="material-icons">verified_user</span></button></form>
                         <% } %>
                     </td>
                 </tr>

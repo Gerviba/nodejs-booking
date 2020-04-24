@@ -21,11 +21,11 @@
                 <tbody>
                 <% reviews.forEach(review => { %>
                 <tr>
-                    <td scope="row"><%= review.placeName %></td>
+                    <td scope="row"><%= review._place.name %></td>
                     <td><%= review.rating %> stars</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" role="button" href="/place/<%= review.placeId %>#review-<%= review.id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
-                        <form style="display: inline-block" action="/ratings/<%= review.id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
+                        <a class="btn btn-primary btn-sm" role="button" href="/place/<%= review._place._id %>#review-<%= review._id %>" style="max-height: 36px"><span class="material-icons">visibility</span></a>
+                        <form style="display: inline-block" action="/ratings/<%= review._id %>/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" role="button" style="max-height: 36px"><span class="material-icons">delete</span></button></form>
                     </td>
                 </tr>
                 <% }); %>

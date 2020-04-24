@@ -2,47 +2,32 @@ const Schema = require('mongoose').Schema;
 const db = require('../config/database');
 
 const PlaceEntity = db.model('Place', {
-    id: Number,
+    name: String,
+    location: String,
     _author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    name: String,
-    location: String,
+    description: String,
     longitude: Number,
     latitude: Number,
     website: String,
     photo1: String,
     photo2: String,
     type: String,
-    labels: [[String]],
+    labels: [String],
     lastVisited: String,
-    priceCategory: Number
+    priceCategory: Number,
+    rating: Number
 });
 
-/**
- *
- * @type {{website: string, latitude: number, rating: number, description: string, authorId: number, photo2: string, type: string, labels: [string, string, string], photo1: string, lastVisited: string, name: string, priceCategory: number, location: string, id: number, longitude: number}}
- */
-var placeMock = {
-    id: 1,
-    authorId: 2,
-    name: 'Name of the place 1',
-    location: 'Location of the place\n',
-    longitude: 0.0,
-    latitude: 0.0,
-    website: 'http://website.com/xyz/building',
-    photo1: 'https://i.picsum.photos/id/1031/5446/3063.jpg',
-    photo2: 'https://i.picsum.photos/id/1029/4887/2759.jpg',
-    type: 'accommodation',
-    priceCategory: 5,
-    lastVisited: '2020-00-00',
-    labels: ["wifi", "bathroom", "vip"],
-    rating: 3,
-    description: 'Lorem ipsum dolor sit amet'
-};
+module.exports = PlaceEntity;
 
-module.exports.demoPlaces = [
+/**
+ * Demo places (for manual testing purposes)
+ * @type {({website: string, latitude: number, rating: number, description: string, type: string, photo2: string, ownerId: number, labels: [string, string], photo1: string, lastVisited: string, ownerName: string, name: string, priceCategory: number, location: string, id: number, longitude: number}|{website: string, latitude: number, rating: number, description: string, type: string, photo2: string, ownerId: number, labels: [string, string], photo1: string, lastVisited: string, ownerName: string, name: string, priceCategory: number, location: string, id: number, longitude: number}|{website: string, latitude: number, rating: number, description: string, type: string, photo2: string, ownerId: number, labels: [string], photo1: string, lastVisited: string, ownerName: string, name: string, priceCategory: number, location: string, id: number, longitude: number})[]}
+ */
+module.exports._demoPlaces = [
     {
         id: 1,
         name: 'Accommodation 1',
@@ -51,8 +36,7 @@ module.exports.demoPlaces = [
         photo1: 'https://i.picsum.photos/id/1065/2000/1000.jpg',
         type: 'accommodation',
         rating: 4,
-        labels: ["wifi", "bathroom"],
-
+        labels: ['wifi', 'bathroom'],
         longitude: 17.0,
         latitude: 42.0,
         lastVisited: '2020-00-00',
@@ -60,7 +44,7 @@ module.exports.demoPlaces = [
         website: 'http://website.com/xyz/building1',
         priceCategory: 2,
         ownerId: 2,
-        ownerName: "Kiss Pista" // TODO: Calculate dynamically from db
+        ownerName: 'Kiss Pista'
     },
     {
         id: 2,
@@ -70,8 +54,7 @@ module.exports.demoPlaces = [
         photo1: 'https://i.picsum.photos/id/178/2000/1000.jpg',
         type: 'accommodation',
         rating: 1,
-        labels: ["wifi", "vip"],
-
+        labels: ['wifi', 'vip'],
         longitude: 17.0,
         latitude: 42.0,
         lastVisited: '2020-02-01',
@@ -79,7 +62,7 @@ module.exports.demoPlaces = [
         website: 'http://website.com/xyz/building2',
         priceCategory: 5,
         ownerId: 1,
-        ownerName: "Admi User" // TODO: Calculate dynamically from db
+        ownerName: 'Admi User'
     },
     {
         id: 3,
@@ -89,8 +72,7 @@ module.exports.demoPlaces = [
         photo1: 'https://i.picsum.photos/id/163/400/200.jpg',
         type: 'pub',
         rating: 3,
-        labels: ["parking"],
-
+        labels: ['parking'],
         longitude: 17.0,
         latitude: 42.0,
         lastVisited: '2020-04-00',
@@ -98,6 +80,6 @@ module.exports.demoPlaces = [
         website: 'http://website.com/xyz/pub',
         priceCategory: 1,
         ownerId: 1,
-        ownerName: "Admi User" // TODO: Calculate dynamically from db
+        ownerName: 'Admi User'
     }
 ];

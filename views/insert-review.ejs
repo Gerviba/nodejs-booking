@@ -7,14 +7,19 @@
     </div>
 </div>
 
-<form method="post" action="/place/<%= place.id %>/new-review">
+<form method="post" action="/place/<%= place._id %>/new-review">
     <div class="album py-5">
         <div class="container" style="max-width: 400px">
+            <% if (typeof errors !== 'undefined') { %>
+            <div class="alert alert-danger row" role="alert">
+                <% errors.forEach(err => { %><li><%= err %></li><% }) %>
+            </div>
+            <% } %>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="price-addon">$$$</span>
                 </div>
-                <input type="number" class="form-control" placeholder="Price" min="0" />
+                <input type="number" class="form-control" placeholder="Price" min="0" name="costs" value="<%= (typeof review === 'undefined') ? '' : review.costs %>"/>
             </div>
             <div class="input-group mb-3">
                 <small class="text-muted">
@@ -25,7 +30,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="rating-addon">Rating</span>
                 </div>
-                <input type="number" min="1" max="5" step="1" class="form-control" placeholder="Rating" value="5" />
+                <input type="number" min="1" max="5" step="1" class="form-control" placeholder="Rating" name="rating" value="<%= (typeof review === 'undefined') ? '5' : review.rating %>"/>
                 <div class="input-group-append">
                     <span class="input-group-text" id="star-addon">STARS</span>
                 </div>
@@ -37,11 +42,11 @@
         <div class="container" style="max-width: 800px">
             <div class="form-group text-center">
                 <label for="detailedTextareaControl">DETAILED REVIEW</label>
-                <textarea class="form-control m-3" id="detailedTextareaControl" rows="3"></textarea>
+                <textarea class="form-control m-3" id="detailedTextareaControl" rows="3" name="text"><%= (typeof review === 'undefined') ? '' : review.text %></textarea>
             </div>
             <div class="form-group text-center p-3">
                 <input type="submit" class="btn btn-primary" value="SEND REVIEW"/>
-                <a href="/place/<%= place.id %>" class="btn btn-dark">Nah, I keep my secrets</a>
+                <a href="/place/<%= place._id %>" class="btn btn-dark">Nah, I keep my secrets</a>
             </div>
         </div>
     </div>

@@ -1,11 +1,22 @@
+const requireResource = require('../common/commons').requireResource;
+
 /**
  * Provides the data of the selected users
  * - Result will be saved to: res.locals.users
  */
 
-const usersRepo = require("../../model/user-entity");
+module.exports = repos => {
+    const UserModel = repos.userRepo;
 
-module.exports = objects => (req, res, next) => {
-    res.locals.users = [usersRepo.adminalUserMock, usersRepo.normalUserMock];
-    next();
+    return (req, res, next) => {
+        UserModel
+            .find()
+            .exec((err, users) => {
+                if (!requireResource(err, users, 'user', '[ALL]'))
+                    return res.status(404).send('Failed to fetch users', err);
+
+                res.locals.users = users;
+                next();
+            });
+    };
 };

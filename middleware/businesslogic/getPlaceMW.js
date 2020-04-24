@@ -1,19 +1,41 @@
+const requireResource = require('../common/commons').requireResource;
+const paramNotFound = require('../common/commons').paramNotFound;
+
 /**
  * Provides the data of the selected place
  * - uses the :id param as place id
  * - Result will be saved to: res.locals.place
  */
+module.exports = repos => {
+    const PlaceModel = repos.placeRepo;
+    const ReviewModel = repos.reviewRepo;
 
-const placesRepo = require("../../model/place-entity");
-const reviewRepo = require("../../model/review-entity");
+    return (req, res, next) => {
+        if (paramNotFound(req, 'id')) {
+            res.redirect('/');
+            return;
+        }
 
-module.exports = objects => (req, res, next) => {
-    if (typeof req.params.id === 'undefined' || req.params.id === null) {
-        res.redirect("/");
-        return;
-    }
+        PlaceModel
+            .findOne({ _id: req.params.id })
+            .populate('_author')
+            .exec((err, place) => {
+                if (!requireResource(err, place, 'place', req.params.id))
+                    return res.status(404).send('Place not found');
 
-    res.locals.place = placesRepo.demoPlaces[req.params.id - 1];
-    res.locals.reviews = [reviewRepo.reviewMock];
-    next();
+                ReviewModel
+                    .find({ _place: place._id })
+                    .populate('_owner')
+                    .exec((err, reviews) => {
+                        if (!requireResource(err, reviews, 'reviews', place._id))
+                            return res.status(500).send('Failed to fetch reviews', err);
+
+                        res.locals.place = place;
+                        res.locals.reviews = reviews;
+                        next();
+                    });
+
+            });
+
+    };
 };
