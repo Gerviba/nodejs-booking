@@ -12,4 +12,9 @@ require('./route/index')(app);
 
 app.use((err, req, res, next) => console.log(err));
 
-app.listen(3000, () => console.log('Listening on http://127.0.0.1:3000/'));
+app.listen(3000, () => {
+    console.info('Listening on http://127.0.0.1:3000/');
+    console.info(typeof process.env.NODE_HW_AUTHSCH_SECRET !== 'undefined'
+                    && process.env.NODE_HW_AUTHSCH_SECRET.length === 80
+        ? 'AuthSCH secret key was provided!' : 'Authsch secret key is missing. Use `NODE_HW_AUTHSCH_SECRET` env variable.');
+});

@@ -1,7 +1,6 @@
 const authorizationMW = require('../middleware/permissions/autorizeMW');
 const checkAdminMW = require('../middleware/permissions/adminMW');
 const logoutMW = require('../middleware/permissions/logoutMW');
-const redirectToSingleSignOnMW = require('../middleware/permissions/ssoRedirectMW');
 const endpointMW = require('../middleware/common/endpointMW');
 const redirectMW = require('../middleware/common/redirectMW');
 
@@ -21,6 +20,7 @@ const validatePlaceMW = require('../middleware/businesslogic/validatePlaceMW');
 const getAllPlacesMW = require('../middleware/businesslogic/getAllPlacesMW');
 const getAllUsersMW = require('../middleware/businesslogic/getAllUsersMW');
 const grantAdminMW = require('../middleware/permissions/grantUserMW');
+const passportSerializeMW = require('../middleware/permissions/passportSerializeMW');
 
 const testLoginAsAdmin = require('../middleware/test/loginAsAdminMW');
 const testLoginAsUser = require('../middleware/test/loginAsUserMW');
@@ -30,6 +30,12 @@ const userRepo = require('../model/userEntity');
 const placeRepo = require('../model/placeEntity');
 const reviewRepo = require('../model/reviewEntity');
 
+const passport = require('passport');
+const OAuth2Strategy = require('passport-oauth2').Strategy;
+
+const verifyFn = require('../middleware/permissions/passportLogicUtil').verifyFn;
+const userProfileFn = require('../middleware/permissions/passportLogicUtil').userProfileFn;
+
 module.exports = app => {
     const objectRepo = {
         userRepo: userRepo,
@@ -37,12 +43,40 @@ module.exports = app => {
         reviewRepo: reviewRepo
     };
 
+    const authschStrategy = new OAuth2Strategy({
+            authorizationURL: 'https://auth.sch.bme.hu/site/login',
+            tokenURL: 'https://auth.sch.bme.hu/oauth2/token',
+            clientID: '25245506730974008388',
+            clientSecret: process.env.NODE_HW_AUTHSCH_SECRET,
+            scope: ["basic", "sn", "givenName", "mail"],
+            state: true
+        },
+        verifyFn(objectRepo)
+    );
+
+    authschStrategy.userProfile = userProfileFn(authschStrategy);
+
+    passport.serializeUser(passportSerializeMW(objectRepo));
+    passport.deserializeUser((req, user, cb) => cb(null, user));
+
+    app.use(passport.initialize({}));
+    app.use(passport.session({
+        secret : 'nodehf_session_secret',
+        cookie: { _expires : 60000000, maxAge: 60000000 }
+    }));
+
+    passport.use(authschStrategy);
+
+    app.get('/auth/authsch/callback',
+        passport.authenticate('oauth2', { failureRedirect: '/failed' }),
+        (req, res) => res.redirect('/'));
+
     app.get('/ratings',
         authorizationMW(objectRepo),
         getMyReviewsMW(objectRepo),
         endpointMW(objectRepo, 'ratings'));
 
-    app.get('/login', redirectToSingleSignOnMW(objectRepo));
+    app.get('/login', passport.authenticate('oauth2'));
 
     app.get('/logout',
         logoutMW(objectRepo),
